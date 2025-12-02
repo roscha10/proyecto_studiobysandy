@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Portfolio · Studio by Sandy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Mismas fuentes que la home -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-page: #f4f1e9;
+      --bg-light: #faf7f0;
+      --bg-soft: #fdfbf6;
+      --accent-soft: #f3f7d8;
+      --accent-soft-rose: #fbe9ef;
+      --text-main: #151515;
+      --text-soft: #6b7280;
+      --border-soft: #e2e2dc;
+      --btn-bg: #f5f1e8;
+      --btn-border: #111111;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: 100vh;
+      background: var(--bg-page);
+    }
+
+    .max {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    @media (max-width: 900px) {
+      .max {
+        padding: 0 20px;
+      }
+    }
+
+    /* HEADER (igual que en index, pero con link a index.html) */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--bg-page);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+    }
+
+    .brand {
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-size: 14px;
+    }
+
+    nav a {
+      position: relative;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 1px;
+      background: #111;
+      transition: width 0.2s ease-out;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .btn-header {
+      border-radius: 999px;
+      padding: 8px 18px;
+      border: 1px solid var(--btn-border);
+      background: var(--btn-bg);
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-header span {
+      font-size: 16px;
+      transform: translateY(1px);
+    }
+
+    @media (max-width: 820px) {
+      nav {
+        display: none;
+      }
+    }
+
+    /* HERO PORTFOLIO */
+    .hero-portfolio {
+      background: var(--bg-page);
+      padding: 40px 0 28px;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .hero-portfolio-inner {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 26px;
+      align-items: center;
+    }
+
+    .hero-port-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(32px, 4vw, 40px);
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .hero-port-sub {
+      font-size: 14px;
+      color: var(--text-soft);
+      max-width: 440px;
+      margin-bottom: 18px;
+    }
+
+    .hero-port-mini {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
+
+    .hero-port-note {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .hero-port-image-box {
+      background: var(--bg-soft);
+      padding: 20px;
+      border-radius: 18px;
+      border: 1px solid var(--border-soft);
+    }
+
+    .hero-port-image-box img {
+      border-radius: 14px;
+      object-fit: cover;
+      height: 260px;
+      width: 100%;
+    }
+
+    @media (max-width: 900px) {
+      .hero-portfolio-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* FILTROS */
+    .filters {
+      background: var(--bg-page); /* para que se integre con el fondo */
+      border-bottom: none;
+      padding: 18px 0;
+    }
+
+    .filters-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      justify-content: space-between;
+    }
+
+    .filters-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-soft);
+    }
+
+    .filters-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-btn {
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      background: #fdfbf6;
+      padding: 6px 14px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .filter-btn.active {
+      border-color: #111;
+      background: #111;
+      color: #fff;
+    }
+
+    /* ==== PORTFOLIO ESTILO EDITORIAL ==== */
+
+    /* Fondo más limpio alrededor del grid */
+    .projects-section {
+      background: var(--bg-page);
+      padding: 60px 0 80px;
+    }
+
+    /* Tres columnas con más aire entre piezas */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 36px;
+    }
+
+    @media (max-width: 1000px) {
+      .projects-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .projects-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* Sacamos la caja y dejamos imagen + texto */
+    .project-card {
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.18s ease-out;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+    }
+
+    /* Imagen alta tipo editorial */
+    .project-image-wrapper {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 3 / 4;
+      border-radius: 18px;
+    }
+
+    .project-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.25s ease-out;
+    }
+
+    .project-card:hover .project-image-wrapper img {
+      transform: scale(1.04);
+    }
+
+    /* Ocultamos la chapita sobre la foto (opcional) */
+    .project-tag {
+      display: none;
+    }
+
+    /* Texto debajo de la imagen, limpio */
+    .project-body {
+      padding: 12px 2px 0;
+    }
+
+    .project-type {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-soft);
+      margin-bottom: 4px;
+    }
+
+    .project-title {
+      font-family: "Playfair Display", serif;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .project-desc {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 2px;
+    }
+
+    .project-more {
+      font-size: 12px;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* PANEL DETALLE (tipo "drawer" simple) */
+    .detail-panel {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 60;
+    }
+
+    .detail-panel.active {
+      display: flex;
+    }
+
+    .detail-box {
+      max-width: 760px;
+      width: 92%;
+      background: #fdfbf6;
+      border-radius: 18px;
+      border: 1px solid #d4d4cf;
+      padding: 18px 18px 16px;
+      box-shadow: 0 22px 50px rgba(15, 23, 42, 0.4);
+    }
+
+    .detail-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .detail-title {
+      font-family: "Playfair Display", serif;
+      font-size: 22px;
+    }
+
+    .detail-close {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .detail-body {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 18px;
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .detail-body img {
+      border-radius: 12px;
+      object-fit: cover;
+      height: 220px;
+      width: 100%;
+    }
+
+    @media (max-width: 780px) {
+      .detail-body {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .detail-meta {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 8px;
+      color: var(--text-soft);
+    }
+
+    /* CTA FINAL */
+    .cta-final {
+      background: var(--accent-soft-rose);
+      padding: 40px 0 32px;
+      text-align: center;
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .cta-title {
+      font-family: "Playfair Display", serif;
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .cta-sub {
+      font-size: 14px;
+      color: var(--text-soft);
+      max-width: 480px;
+      margin: 0 auto 20px;
+    }
+
+    .btn-main {
+      border-radius: 999px;
+      padding: 10px 22px;
+      border: 1px solid #111;
+      background: #111;
+      color: #fff;
+      font-size: 13px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--bg-page);
+      padding: 18px 0 24px;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    /* Centrar el hero del portfolio */
+    .hero-portfolio-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 24px;
+    }
+
+    /* Que los párrafos no se hagan demasiado anchos */
+    .hero-port-sub,
+    .hero-port-note {
+      max-width: 600px;
+      margin: 0 auto 18px;
+    }
+
+    /* La cajita de la imagen centrada y con ancho controlado */
+    .hero-port-image-box {
+      max-width: 420px;
+      width: 100%;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <!-- HEADER -->
+    <header>
+      <div class="max header-inner">
+        <div class="brand">
+          <a href="index.html">Studio by Sandy</a>
+        </div>
+        <nav>
+          <a href="index.html#servicios">Servicios</a>
+          <a href="index.html#creativas">Para creativas</a>
+          <a href="index.html#sobre">Sobre Sandy</a>
+          <a href="index.html#contacto">Contacto</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="index.html#contacto" class="btn-header">
+            Trabajemos juntas <span>↗</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- HERO PORTFOLIO -->
+    <section class="hero-portfolio">
+      <div class="max hero-portfolio-inner">
+        <div>
+          <p class="hero-port-mini">Selección de proyectos</p>
+          <h1 class="hero-port-title">Galería de trabajos de Studio by Sandy.</h1>
+          <p class="hero-port-sub">
+            Una colección de marcas, webs y contenidos que he creado junto a clientas alrededor del mundo.
+            Desliza, filtra por tipo de proyecto y explora cómo se ve el trabajo cuando se hace con calma.
+          </p>
+          <p class="hero-port-note">
+            Cada proyecto tiene su historia: proceso, decisiones y pequeñas obsesiones de diseño que hacen
+            que la marca se sienta como suya.
+          </p>
+
+    </section>
+
+    <!-- FILTROS -->
+    <section class="filters">
+      <div class="max filters-inner">
+        <div class="filters-label">Filtrar por tipo de proyecto</div>
+        <div class="filters-buttons">
+          <button class="filter-btn active" data-filter="all">Todos</button>
+          <button class="filter-btn" data-filter="branding">Branding</button>
+          <button class="filter-btn" data-filter="web">Web</button>
+          <button class="filter-btn" data-filter="contenido">Contenido</button>
+          <button class="filter-btn" data-filter="mentoria">Mentorías</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- GRID DE PROYECTOS -->
+    <section class="projects-section">
+      <div class="max">
+        <div class="projects-grid">
+
+          <!-- Proyecto 1 -->
+          <article class="project-card" data-category="branding" data-title="Luz Interior Studio"
+                   data-description="Branding completo y sistema visual para una terapeuta que quería un universo calmado y profesional."
+                   data-details="Paleta cálida, tipografías serif suaves y un sistema de aplicaciones para web, redes e impresos."
+                   data-image="https://images.pexels.com/photos/3965545/pexels-photo-3965545.jpeg?auto=compress&cs=tinysrgb&w=1200">
+            <div class="project-image-wrapper">
+              <img src="https://images.pexels.com/photos/3965545/pexels-photo-3965545.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Luz Interior Studio" />
+              <div class="project-tag">Branding</div>
+            </div>
+            <div class="project-body">
+              <div class="project-type">Identidad de marca</div>
+              <h3 class="project-title">Luz Interior Studio</h3>
+              <p class="project-desc">
+                Un sistema visual cálido y sencillo para una marca de terapia y bienestar emocional.
+              </p>
+              <div class="project-more">Ver detalles del proyecto ↗</div>
+            </div>
+          </article>
+
+          <!-- Proyecto 2 -->
+          <article class="project-card" data-category="web" data-title="Casa Botánica"
+                   data-description="Diseño y desarrollo de una web boutique para una tienda de plantas y objetos."
+                   data-details="Landing principal, página de catálogo y blog de cuidados, todo con fotografía suave y tipografía editorial."
+                   data-image="https://images.pexels.com/photos/7156880/pexels-photo-7156880.jpeg?auto=compress&cs=tinysrgb&w=1200">
+            <div class="project-image-wrapper">
+              <img src="https://images.pexels.com/photos/7156880/pexels-photo-7156880.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Casa Botánica" />
+              <div class="project-tag">Web</div>
+            </div>
+            <div class="project-body">
+              <div class="project-type">Diseño web</div>
+              <h3 class="project-title">Casa Botánica</h3>
+              <p class="project-desc">
+                Un sitio minimalista que combina producto, historias y fotos llenas de luz natural.
+              </p>
+              <div class="project-more">Ver detalles del proyecto ↗</div>
+            </div>
+          </article>
+
+          <!-- Proyecto 3 -->
+          <article class="project-card" data-category="contenido" data-title="Club de Lectura Lunas"
+                   data-description="Sistema de contenido y piezas para redes sociales."
+                   data-details="Calendarios mensuales, plantillas para reseñas y frases, todo en una estética delicada y femenina."
+                   data-image="https://images.pexels.com/photos/4046718/pexels-photo-4046718.jpeg?auto=compress&cs=tinysrgb&w=1200">
+            <div class="project-image-wrapper">
+              <img src="https://images.pexels.com/photos/4046718/pexels-photo-4046718.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Club de Lectura Lunas" />
+              <div class="project-tag">Contenido</div>
+            </div>
+            <div class="project-body">
+              <div class="project-type">Contenido & redes</div>
+              <h3 class="project-title">Club de Lectura Lunas</h3>
+              <p class="project-desc">
+                Piezas recurrentes que hacen que la comunidad reconozca la marca al instante.
+              </p>
+              <div class="project-more">Ver detalles del proyecto ↗</div>
+            </div>
+          </article>
+
+          <!-- Proyecto 4 -->
+          <article class="project-card" data-category="branding" data-title="Café Amanecer Lento"
+                   data-description="Identidad completa para una cafetería enfocada en rituales de mañana."
+                   data-details="Sistema de logo, packaging, cartas y piezas para RRSS con foco en textura y calidez."
+                   data-image="https://images.pexels.com/photos/4857777/pexels-photo-4857777.jpeg?auto=compress&cs=tinysrgb&w=1200">
+            <div class="project-image-wrapper">
+              <img src="https://images.pexels.com/photos/4857777/pexels-photo-4857777.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Café Amanecer Lento" />
+              <div class="project-tag">Branding</div>
+            </div>
+            <div class="project-body">
+              <div class="project-type">Identidad de marca</div>
+              <h3 class="project-title">Café Amanecer Lento</h3>
+              <p class="project-desc">
+                Una marca diseñada para sentirse como el primer sorbo de café tranquilo del día.
+              </p>
+              <div class="project-more">Ver detalles del proyecto ↗</div>
+            </div>
+          </article>
+
+          <!-- Proyecto 5 -->
+          <article class="project-card" data-category="web" data-title="Escuela Creativa Online"
+                   data-description="Landing de lanzamiento y páginas internas para una escuela digital."
+                   data-details="Estructura pensada para vender cursos sin perder el toque editorial y fotográfico."
+                   data-image="https://images.pexels.com/photos/6476584/pexels-photo-6476584.jpeg?auto=compress&cs=tinysrgb&w=1200">
+            <div class="project-image-wrapper">
+              <img src="https://images.pexels.com/photos/6476584/pexels-photo-6476584.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Escuela Creativa Online" />
+              <div class="project-tag">Web</div>
+            </div>
+            <div class="project-body">
+              <div class="project-type">Diseño web</div>
+              <h3 class="project-title">Escuela Creativa Online</h3>
+              <p class="project-desc">
+                Un sitio que combina información clara, fotos cálidas y llamados a la acción suaves.
+              </p>
+              <div class="project-more">Ver detalles del proyecto ↗</div>
+            </div>
+          </article>
+
+          <!-- Proyecto 6 -->
+          <article class="project-card" data-category="mentoria" data-title="Estudio Brisa"
+                   data-description="Mentoría para ordenar la oferta y presencia digital de una diseñadora."
+                   data-details="Revisión de branding, web y propuestas comerciales; acompañamiento para relanzar su estudio con claridad."
+                   data-image="https://images.pexels.com/photos/6311579/pexels-photo-6311579.jpeg?auto=compress&cs=tinysrgb&w=1200">
+            <div class="project-image-wrapper">
+              <img src="https://images.pexels.com/photos/6311579/pexels-photo-6311579.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Estudio Brisa" />
+              <div class="project-tag">Mentoría</div>
+            </div>
+            <div class="project-body">
+              <div class="project-type">Mentoría para creativas</div>
+              <h3 class="project-title">Estudio Brisa</h3>
+              <p class="project-desc">
+                Un caso de acompañamiento 1:1 para una diseñadora que quería ordenar su propio estudio.
+              </p>
+              <div class="project-more">Ver detalles del proyecto ↗</div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="cta-final">
+      <div class="max">
+        <h2 class="cta-title">¿Te imaginas tu proyecto en esta galería?</h2>
+        <p class="cta-sub">
+          Si sentís que tu marca merece un lugar en un portfolio así de cuidado, podemos crearla juntas.
+          Escribime y te cuento cómo podríamos trabajar tu branding, web o contenido.
+        </p>
+        <button class="btn-main" onclick="window.location.href='index.html#contacto'">
+          Empezar mi proyecto con Sandy
+        </button>
+      </div>
+    </section>
+
+<footer>
+  <div class="max footer-inner">
+    <div class="copyright">
+      <p>&copy; Studio by Sandy · 2025. Todos los derechos reservados.</p>
+      <p class="credit">
+        Este sitio web fue desarrollado por 
+        <a href="https://www.instagram.com/kaimind.data" target="_blank" rel="noopener">Kaimaind</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/script.js?v=14"></script>
+</body>
+</html>
+
+        
+  <!-- PANEL DE DETALLE -->
+  <div class="detail-panel" id="detailPanel">
+    <div class="detail-box">
+      <div class="detail-top">
+        <h3 class="detail-title" id="detailTitle">Título del proyecto</h3>
+        <button class="detail-close" onclick="closeDetail()">×</button>
+      </div>
+      <div class="detail-body">
+        <div>
+          <div class="detail-meta" id="detailMeta">Branding · Web · Contenido</div>
+          <p id="detailDescription">
+            Descripción principal del proyecto.
+          </p>
+          <br />
+          <p id="detailDetails">
+            Más detalles sobre el proceso, decisiones de diseño y resultado final.
+          </p>
+        </div>
+        <div>
+          <img id="detailImage" src="" alt="Detalle del proyecto" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Filtros por categoría
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const projectCards = document.querySelectorAll(".project-card");
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const filter = btn.getAttribute("data-filter");
+
+        filterButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        projectCards.forEach(card => {
+          const category = card.getAttribute("data-category");
+          if (filter === "all" || filter === category) {
+            card.style.display = "block";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      });
+    });
+
+    // Panel de detalle interactivo
+    const detailPanel = document.getElementById("detailPanel");
+    const detailTitle = document.getElementById("detailTitle");
+    const detailMeta = document.getElementById("detailMeta");
+    const detailDescription = document.getElementById("detailDescription");
+    const detailDetails = document.getElementById("detailDetails");
+    const detailImage = document.getElementById("detailImage");
+
+    projectCards.forEach(card => {
+      card.addEventListener("click", () => {
+        const title = card.getAttribute("data-title");
+        const desc = card.getAttribute("data-description");
+        const details = card.getAttribute("data-details");
+        const img = card.getAttribute("data-image");
+        const cat = card.getAttribute("data-category");
+
+        const metaMap = {
+          branding: "Branding · Identidad de marca",
+          web: "Diseño & desarrollo web",
+          contenido: "Contenido & redes sociales",
+          mentoria: "Mentorías para creativas"
+        };
+
+        detailTitle.textContent = title;
+        detailMeta.textContent = metaMap[cat] || "";
+        detailDescription.textContent = desc;
+        detailDetails.textContent = details;
+        detailImage.src = img;
+
+        detailPanel.classList.add("active");
+      });
+    });
+
+    function closeDetail() {
+      detailPanel.classList.remove("active");
+    }
+
+    detailPanel.addEventListener("click", (e) => {
+      if (e.target === detailPanel) {
+        closeDetail();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeDetail();
+      }
+    });
+  </script>
+</body>
+</html>

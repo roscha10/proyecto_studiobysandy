@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Studio by Sandy · Branding & Diseño</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Tipografía parecida (serif para títulos + sans para textos) -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-page: #f4f1e9;      /* crema pastel */
+      --bg-light: #faf7f0;
+      --bg-soft: #fdfbf6;
+      --accent-soft: #f3f7d8;  /* verde lima suave */
+      --accent-soft-rose: #fbe9ef;
+      --text-main: #151515;
+      --text-soft: #6b7280;
+      --border-soft: #e2e2dc;
+      --brand: #111111;
+      --btn-bg: #f5f1e8;
+      --btn-border: #111111;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Layout general */
+    .page {
+      min-height: 100vh;
+      background: var(--bg-page);
+    }
+
+    .max {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    @media (max-width: 900px) {
+      .max {
+        padding: 0 20px;
+      }
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--bg-page);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+    }
+
+    .brand {
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-size: 14px;
+    }
+
+    nav a {
+      position: relative;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 1px;
+      background: #111;
+      transition: width 0.2s ease-out;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .btn-header {
+      border-radius: 999px;
+      padding: 8px 18px;
+      border: 1px solid var(--btn-border);
+      background: var(--btn-bg);
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-header span {
+      font-size: 16px;
+      transform: translateY(1px);
+    }
+
+    @media (max-width: 820px) {
+      nav {
+        display: none; /* Para demo: en producción podrías hacer un menú móvil */
+      }
+    }
+
+    /* HERO PRINCIPAL */
+    .hero {
+      background: var(--bg-page);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 24px;
+      padding: 32px 0 40px;
+      align-items: stretch;
+    }
+
+    .hero-img {
+      background: #ffffff;
+      overflow: hidden;
+    }
+
+    .hero-img-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      height: 100%;
+    }
+
+    .hero-img-left {
+      background: #f5f5f5;
+    }
+
+    /* FOTO GRANDE: sillón azul con animación izquierda -> derecha */
+    .hero-img-left img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      filter: none; /* dejamos el color del sillón */
+
+      opacity: 0;
+      clip-path: inset(0 100% 0 0); /* oculto desde la derecha */
+      animation: heroLeftReveal 1.2s ease-out forwards;
+    }
+
+    .hero-img-right {
+      background: #f8f6f2;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 18px;
+      gap: 12px;
+    }
+
+    .hero-mini {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .hero-img-right-top {
+      flex: 1;
+    }
+
+    /* FOTO PEQUEÑA: bosque con animación arriba -> abajo */
+    .hero-img-right-top img {
+      border-radius: 18px;
+      object-fit: cover;
+      height: 190px;
+      width: 100%;
+
+      opacity: 0;
+      clip-path: inset(100% 0 0 0); /* oculto desde arriba */
+      animation: heroTopReveal 1s ease-out forwards;
+      animation-delay: 0.3s;
+    }
+
+    .hero-img-right-bottom {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero-eyebrow {
+      font-size: 14px;
+      color: var(--text-soft);
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(32px, 4vw, 42px);
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      color: var(--text-soft);
+      max-width: 410px;
+      margin-bottom: 22px;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .btn-main {
+      border-radius: 999px;
+      padding: 10px 22px;
+      border: 1px solid #111;
+      background: #111;
+      color: #fff;
+      font-size: 13px;
+    }
+
+    .btn-ghost {
+      border-radius: 999px;
+      padding: 10px 20px;
+      border: 1px solid #d1d5db;
+      background: transparent;
+      font-size: 13px;
+    }
+
+    .hero-meta {
+      font-size: 13px;
+      color: var(--text-soft);
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .hero-meta span strong {
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    @media (max-width: 980px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ANIMACIONES KEYFRAMES */
+    @keyframes heroLeftReveal {
+      from {
+        opacity: 0;
+        clip-path: inset(0 100% 0 0);
+      }
+      to {
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+      }
+    }
+
+    @keyframes heroTopReveal {
+      from {
+        opacity: 0;
+        clip-path: inset(100% 0 0 0);
+      }
+      to {
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+      }
+    }
+
+    /* SECCIÓN SERVICIOS (tipo listado lateral) */
+    .services {
+      background: #ffffff;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .services-inner {
+      display: grid;
+      grid-template-columns: 1.2fr 1.1fr;
+      gap: 32px;
+      padding: 40px 0;
+      align-items: center;
+    }
+
+    .services-image {
+      background: var(--bg-light);
+      padding: 24px;
+    }
+
+    .services-image img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      border-radius: 14px;
+    }
+
+    .services-copy-top {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-soft);
+      margin-bottom: 6px;
+    }
+
+    .services-title-big {
+      font-family: "Playfair Display", serif;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .services-sub {
+      font-size: 14px;
+      color: var(--text-soft);
+      max-width: 360px;
+      margin-bottom: 18px;
+    }
+
+    .services-link {
+      font-size: 13px;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .services-list {
+      border-left: 1px solid #ddd;
+    }
+
+    .service-row {
+      display: grid;
+      grid-template-columns: 1.3fr auto;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid #eee;
+      padding-left: 24px;
+    }
+
+    .service-row:last-child {
+      border-bottom: none;
+    }
+
+    .service-name {
+      font-family: "Playfair Display", serif;
+      font-size: 26px;
+    }
+
+    .service-number {
+      font-size: 13px;
+      color: #999;
+    }
+
+    @media (max-width: 980px) {
+      .services-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .services-list {
+        border-left: none;
+        border-top: 1px solid #ddd;
+      }
+
+      .service-row {
+        padding-left: 0;
+      }
+    }
+
+    /* SECCIÓN PARA CREATIVAS */
+    .for-creatives {
+      background: var(--bg-page);
+      padding: 60px 0 50px;
+      text-align: center;
+    }
+
+    .for-creatives-title {
+      font-family: "Playfair Display", serif;
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .for-creatives-sub {
+      font-size: 14px;
+      color: var(--text-soft);
+      max-width: 540px;
+      margin: 0 auto 22px;
+    }
+
+    .btn-outline {
+      border-radius: 999px;
+      border: 1px solid #111;
+      padding: 10px 26px;
+      font-size: 13px;
+      background: #fdfbf6;
+    }
+
+    .for-creatives-gallery {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      align-items: center;
+    }
+
+    .for-creatives-gallery img {
+      border-radius: 10px;
+      object-fit: cover;
+      height: 210px;
+    }
+
+    @media (max-width: 900px) {
+      .for-creatives-gallery {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* BLOQUE LIMA TIPO BANNER FRASE */
+    .big-banner {
+      background: var(--accent-soft);
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      padding: 50px 0 40px;
+      text-align: center;
+    }
+
+    .big-banner-text {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(30px, 4vw, 40px);
+      max-width: 720px;
+      margin: 0 auto 20px;
+      line-height: 1.1;
+    }
+
+    .big-banner button {
+      border-radius: 999px;
+      padding: 10px 24px;
+      border: 1px solid #111;
+      background: #fdfcf6;
+      font-size: 13px;
+    }
+
+    /* SOBRE SANDY */
+    .about {
+      background: #ffffff;
+      padding: 48px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1.2fr 1.1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .about-img {
+      background: var(--bg-light);
+    }
+
+    .about-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-copy-pre {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
+
+    .about-title {
+      font-family: "Playfair Display", serif;
+      font-size: 32px;
+      margin-bottom: 14px;
+    }
+
+    .about-text {
+      font-size: 14px;
+      color: var(--text-soft);
+      margin-bottom: 12px;
+      max-width: 420px;
+    }
+
+    .about-line {
+      margin: 18px 0;
+      border-bottom: 1px solid #ddd;
+      max-width: 420px;
+    }
+
+    .about-btn {
+      border-radius: 999px;
+      border: 1px solid #111;
+      padding: 10px 22px;
+      font-size: 13px;
+      background: var(--accent-soft-rose);
+    }
+
+    @media (max-width: 980px) {
+      .about-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--bg-page);
+      padding: 18px 0 24px;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-inner span {
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <!-- HEADER -->
+    <header>
+      <div class="max header-inner">
+        <div class="brand">Studio by Sandy</div>
+        <nav>
+          <a href="#servicios">Servicios</a>
+          <a href="#creativas">Para creativas</a>
+          <a href="#sobre">Sobre Sandy</a>
+          <a href="#contacto">Contacto</a>
+          <a href="#portfolio">Portfolio</a>
+          <a href="#contacto" class="btn-header">
+            Trabajemos juntas <span>↗</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- HERO PRINCIPAL -->
+    <section class="hero">
+      <div class="max hero-inner">
+        <!-- BLOQUE IMAGENES -->
+        <div class="hero-img">
+          <div class="hero-img-grid">
+            <div class="hero-img-left">
+              <!-- NUEVA FOTO: sillón azul sobre fondo gris -->
+              <img
+                src="https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                alt="Sillón azul en un espacio minimalista"
+              />
+            </div>
+            <div class="hero-img-right">
+              <div class="hero-img-right-top">
+                <p class="hero-mini">Detalles, textura, luz suave.</p>
+                <!-- NUEVA FOTO: bosque en pleno verano -->
+                <img
+                  src="https://images.pexels.com/photos/572937/pexels-photo-572937.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  alt="Bosque en verano"
+                />
+              </div>
+              <div class="hero-img-right-bottom">
+                <strong>Studio by Sandy</strong><br />
+                Un estudio creativo pequeño, pensado para marcas que quieren verse calmadas,
+                elegantes y profesionales sin perder su esencia humana.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TEXTO HERO -->
+        <div class="hero-text">
+          <p class="hero-eyebrow">Branding, web & contenido para marcas sensibles.</p>
+          <h1 class="hero-title">
+            Convertimos la marca que tienes en mente en una experiencia visual tranquila y coherente.
+          </h1>
+          <p class="hero-sub">
+            Studio by Sandy acompaña a emprendedoras, marcas personales y proyectos creativos que quieren
+            una identidad de marca, una web y un contenido que comuniquen con claridad, sin estridencias.
+          </p>
+          <div class="hero-cta-row">
+            <button class="btn-main" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">
+              Quiero trabajar con Sandy
+            </button>
+            <button class="btn-ghost" onclick="document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})">
+              Ver proyectos destacados
+            </button>
+          </div>
+          <div class="hero-meta">
+            <span><strong>+40 marcas</strong> acompañadas</span>
+            <span><strong>Online</strong> para cualquier país</span>
+            <span><strong>Procesos</strong> claros & amables</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section class="services" id="servicios">
+      <div class="max services-inner">
+        <div>
+          <p class="services-copy-top">Nuestros servicios</p>
+          <h2 class="services-title-big">Lo que diseñamos juntas para tu marca.</h2>
+          <p class="services-sub">
+            Desde el primer logo hasta una web completa y plantillas de contenido listas para usar.
+            Cada servicio está pensado para que tu marca se sienta ordenada y coherente.
+          </p>
+          <a href="#contacto" class="services-link">Ver opciones de proyectos ↗</a>
+        </div>
+
+        <div class="services-list">
+          <div class="service-row">
+            <div class="service-name">Branding</div>
+            <div class="service-number">(01)</div>
+          </div>
+          <div class="service-row">
+            <div class="service-name">Desarrollo web</div>
+            <div class="service-number">(02)</div>
+          </div>
+          <div class="service-row">
+            <div class="service-name">Contenido & redes</div>
+            <div class="service-number">(03)</div>
+          </div>
+          <div class="service-row">
+            <div class="service-name">Mentorías para creativas</div>
+            <div class="service-number">(04)</div>
+          </div>
+          <div class="service-row">
+            <div class="service-name">Cursos & recursos digitales</div>
+            <div class="service-number">(05)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- IMAGEN DE SERVICIOS (LADO IZQUIERDO) -->
+    <section class="services">
+      <div class="max services-inner">
+        <div class="services-image">
+          <img src="https://images.pexels.com/photos/7156880/pexels-photo-7156880.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Flores y props de fotografía" />
+        </div>
+        <div>
+          <p class="services-copy-top">Cómo trabajamos</p>
+          <h2 class="services-title-big">Un proceso que cuida tanto tu marca como tu energía.</h2>
+          <p class="services-sub">
+            Brief, propuesta, diseño, ajustes y entrega final. Todo organizado en etapas para que sepas
+            siempre qué está pasando con tu proyecto y puedas tomar decisiones sin estrés.
+          </p>
+          <p class="services-sub">
+            Trabajamos con pocos proyectos al mismo tiempo para poder crear con calma y detalle.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARA CREATIVAS -->
+    <section class="for-creatives" id="creativas">
+      <div class="max">
+        <h2 class="for-creatives-title">Para creativas</h2>
+        <p class="for-creatives-sub">
+          Una sección pensada para diseñadoras, fotógrafas, ilustradoras y creadoras de contenido
+          que quieren ordenar su propio estudio: procesos, precios, propuestas y presencia digital.
+        </p>
+        <button class="btn-outline">Ver mentorías y recursos ↗</button>
+
+        <div class="for-creatives-gallery">
+          <img src="https://images.pexels.com/photos/3965545/pexels-photo-3965545.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Mockups de branding" />
+          <img src="https://images.pexels.com/photos/4046718/pexels-photo-4046718.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Libro de cliente ideal" />
+          <img src="https://images.pexels.com/photos/4857777/pexels-photo-4857777.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Set de mockups y papelería" />
+        </div>
+      </div>
+    </section>
+
+    <!-- BANNER GRANDE TIPO FRASE -->
+    <section class="big-banner">
+      <div class="max">
+        <p class="big-banner-text">
+          Diseñamos marcas que se sienten suaves, pero se sostienen con estrategia.
+        </p>
+        <button onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">
+          Contáctanos ↗
+        </button>
+      </div>
+    </section>
+
+    <!-- SOBRE SANDY -->
+    <section class="about" id="sobre">
+      <div class="max about-inner">
+        <div class="about-img">
+          <img src="foto/sandy.png" alt="Retrato de Sandy Fernández" />
+        </div>
+        <div>
+          <p class="about-copy-pre">Liderado por Sandy Fernández</p>
+          <h2 class="about-title">La diseñadora detrás de Studio by Sandy.</h2>
+          <p class="about-text">
+            Soy Sandy, diseñadora y directora creativa. Empecé este estudio para acompañar a marcas que
+            quieren verse profesionales sin dejar de sentirse cercanas y humanas.
+          </p>
+          <p class="about-text">
+            Me inspiran la luz suave, las texturas naturales y las conversaciones honestas sobre cómo
+            quieres que tu marca se vea y se sienta.
+          </p>
+          <div class="about-line"></div>
+          <p class="about-text">
+            Cuando trabajamos juntas, mi objetivo es que te sientas acompañada en cada decisión visual,
+            desde el primer boceto hasta las piezas finales que vas a usar en tu día a día.
+          </p>
+          <button class="about-btn" id="contacto">
+            Agendar una llamada con Sandy
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+
+<footer>
+  <div class="max footer-inner">
+    <div class="copyright">
+      <p>&copy; Studio by Sandy · 2025. Todos los derechos reservados.</p>
+      <p class="credit">
+        Este sitio web fue desarrollado por 
+        <a href="https://www.instagram.com/kaimind.data" target="_blank" rel="noopener">Kaimaind</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/script.js?v=14"></script>
+</body>
+</html>

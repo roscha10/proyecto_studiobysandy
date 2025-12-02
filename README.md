@@ -1,1 +1,1 @@
-# proyecto_studiobysandy
+# proyecto_sandybystudio
