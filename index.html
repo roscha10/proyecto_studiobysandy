@@ -163,12 +163,12 @@
       background: #f5f5f5;
     }
 
-    /* FOTO GRANDE: sillón azul con animación izquierda -> derecha */
+    /* FOTO GRANDE */
     .hero-img-left img {
       object-fit: cover;
       width: 100%;
       height: 100%;
-      filter: none; /* dejamos el color del sillón */
+      filter: none;
 
       opacity: 0;
       clip-path: inset(0 100% 0 0); /* oculto desde la derecha */
@@ -193,7 +193,7 @@
       flex: 1;
     }
 
-    /* FOTO PEQUEÑA: bosque con animación arriba -> abajo */
+    /* FOTO PEQUEÑA */
     .hero-img-right-top img {
       border-radius: 18px;
       object-fit: cover;
@@ -555,6 +555,128 @@
     .footer-inner span {
       cursor: pointer;
     }
+
+    /* =============================== */
+    /*  PROCESO DE BRANDING – ACORDEÓN */
+    /* =============================== */
+
+    .branding-process {
+      background: #ffffff;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      padding: 50px 0;
+    }
+
+    .branding-process-header {
+      margin-bottom: 18px;
+    }
+
+    .branding-process-header p {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-soft);
+      margin-bottom: 4px;
+    }
+
+    .branding-process-header h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 30px;
+    }
+
+    .accordion {
+      margin-top: 24px;
+      border-top: 1px solid #111;
+    }
+
+    .accordion-item {
+      border-bottom: 1px solid #111;
+      background: #f7f5ef;
+    }
+
+    .accordion-header {
+      width: 100%;
+      padding: 18px 18px;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-family: "Playfair Display", serif;
+      font-size: 26px;
+    }
+
+    .accordion-header span.label {
+      flex: 1;
+    }
+
+    .accordion-header span.icon {
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .accordion-panel {
+      max-height: 0;
+      overflow: hidden;
+      background: #fdfbf6;
+      transition: max-height 0.35s ease;
+    }
+
+    .accordion-inner {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 26px;
+      padding: 22px 24px 26px;
+    }
+
+    .accordion-inner img {
+      border-radius: 10px;
+      object-fit: cover;
+      width: 100%;
+      height: 180px;
+    }
+
+    .accordion-copy-title {
+      font-weight: 600;
+      margin-bottom: 6px;
+      font-size: 15px;
+    }
+
+    .accordion-copy-text {
+      font-size: 14px;
+      color: var(--text-soft);
+    }
+
+    .accordion-item.is-open .accordion-panel {
+      max-height: 500px;
+    }
+
+    .accordion-item .icon::before {
+      content: "+";
+    }
+
+    .accordion-item.is-open .icon::before {
+      content: "–";
+    }
+
+    @media (max-width: 720px) {
+      .accordion-header {
+        font-size: 22px;
+        padding: 16px 14px;
+      }
+
+      .accordion-inner {
+        grid-template-columns: 1fr;
+        padding: 18px 16px 20px;
+      }
+
+      .accordion-inner img {
+        height: 200px;
+      }
+    }
   </style>
 </head>
 
@@ -584,7 +706,6 @@
         <div class="hero-img">
           <div class="hero-img-grid">
             <div class="hero-img-left">
-              <!-- NUEVA FOTO: sillón azul sobre fondo gris -->
               <img
                 src="https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg?auto=compress&cs=tinysrgb&w=1200"
                 alt="Sillón azul en un espacio minimalista"
@@ -593,7 +714,6 @@
             <div class="hero-img-right">
               <div class="hero-img-right-top">
                 <p class="hero-mini">Detalles, textura, luz suave.</p>
-                <!-- NUEVA FOTO: bosque en pleno verano -->
                 <img
                   src="https://images.pexels.com/photos/572937/pexels-photo-572937.jpeg?auto=compress&cs=tinysrgb&w=1200"
                   alt="Bosque en verano"
@@ -693,6 +813,141 @@
       </div>
     </section>
 
+    <!-- PROCESO DE BRANDING – ACORDEÓN -->
+    <section class="branding-process" id="proceso-branding">
+      <div class="max">
+        <div class="branding-process-header">
+          <p>Así es nuestro proceso</p>
+          <h2>Branding paso a paso para tu marca.</h2>
+        </div>
+
+        <div class="accordion">
+          <!-- 1. Conociendo tu marca -->
+          <div class="accordion-item is-open">
+            <button class="accordion-header" type="button">
+              <span class="label">Conociendo tu marca</span>
+              <span class="icon"></span>
+            </button>
+            <div class="accordion-panel">
+              <div class="accordion-inner">
+                <div>
+                  <img src="https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=800"
+                       alt="Charla creativa con café">
+                </div>
+                <div>
+                  <p class="accordion-copy-title">Brief, videollamada y bienvenida.</p>
+                  <p class="accordion-copy-text">
+                    Primero nos conocemos: te enviamos un pequeño cuestionario, agendamos
+                    una videollamada y conversamos sobre tu historia, valores y metas.
+                    Esta etapa nos ayuda a entender qué necesita realmente tu marca hoy.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Estrategia y concepto -->
+          <div class="accordion-item">
+            <button class="accordion-header" type="button">
+              <span class="label">Estrategia y concepto</span>
+              <span class="icon"></span>
+            </button>
+            <div class="accordion-panel">
+              <div class="accordion-inner">
+                <div>
+                  <img src="https://images.pexels.com/photos/6476584/pexels-photo-6476584.jpeg?auto=compress&cs=tinysrgb&w=800"
+                       alt="Moodboard creativo">
+                </div>
+                <div>
+                  <p class="accordion-copy-title">Moodboard, tono y dirección creativa.</p>
+                  <p class="accordion-copy-text">
+                    A partir de lo que compartís, definimos el corazón de tu marca:
+                    público ideal, tono de voz y territorios visuales. Creamos un
+                    moodboard y una propuesta de dirección para asegurarnos de que
+                    estamos en la misma sintonía antes de diseñar.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Identidad visual -->
+          <div class="accordion-item">
+            <button class="accordion-header" type="button">
+              <span class="label">Identidad visual</span>
+              <span class="icon"></span>
+            </button>
+            <div class="accordion-panel">
+              <div class="accordion-inner">
+                <div>
+                  <img src="https://images.pexels.com/photos/4857777/pexels-photo-4857777.jpeg?auto=compress&cs=tinysrgb&w=800"
+                       alt="Elementos de identidad visual">
+                </div>
+                <div>
+                  <p class="accordion-copy-title">Logotipo, paleta, tipografías y sistema.</p>
+                  <p class="accordion-copy-text">
+                    Diseñamos propuestas completas de identidad: logo principal,
+                    versiones alternativas, paleta de color, tipografías y elementos
+                    gráficos. Te mostramos cómo se ve tu marca aplicada en la vida real.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Diseños complementarios -->
+          <div class="accordion-item">
+            <button class="accordion-header" type="button">
+              <span class="label">Diseños complementarios</span>
+              <span class="icon"></span>
+            </button>
+            <div class="accordion-panel">
+              <div class="accordion-inner">
+                <div>
+                  <img src="https://images.pexels.com/photos/3965555/pexels-photo-3965555.jpeg?auto=compress&cs=tinysrgb&w=800"
+                       alt="Papelería y piezas de marca">
+                </div>
+                <div>
+                  <p class="accordion-copy-title">Piezas para tu día a día.</p>
+                  <p class="accordion-copy-text">
+                    Preparamos las piezas que vas a usar realmente: tarjetas,
+                    plantillas para redes, portadas, presentaciones, gracias por tu
+                    compra, etc. Todo con la misma estética suave y coherente del
+                    universo de tu marca.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Lista para brillar -->
+          <div class="accordion-item">
+            <button class="accordion-header" type="button">
+              <span class="label">Lista para brillar</span>
+              <span class="icon"></span>
+            </button>
+            <div class="accordion-panel">
+              <div class="accordion-inner">
+                <div>
+                  <img src="https://images.pexels.com/photos/4065885/pexels-photo-4065885.jpeg?auto=compress&cs=tinysrgb&w=800"
+                       alt="Lanzamiento de marca">
+                </div>
+                <div>
+                  <p class="accordion-copy-title">Entregas finales y guía de uso.</p>
+                  <p class="accordion-copy-text">
+                    Te entregamos todos los archivos organizados y una mini guía para
+                    que sepas cómo usar tu identidad visual sin perder consistencia.
+                    Así podés lanzar tu nueva marca con seguridad y calma.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- .accordion -->
+      </div>
+    </section>
+
     <!-- PARA CREATIVAS -->
     <section class="for-creatives" id="creativas">
       <div class="max">
@@ -753,19 +1008,41 @@
     </section>
 
     <!-- FOOTER -->
-
-<footer>
-  <div class="max footer-inner">
-    <div class="copyright">
-      <p>&copy; Studio by Sandy · 2025. Todos los derechos reservados.</p>
-      <p class="credit">
-        Este sitio web fue desarrollado por 
-        <a href="https://www.instagram.com/kaimind.data" target="_blank" rel="noopener">Kaimaind</a>
-      </p>
-    </div>
+    <footer>
+      <div class="max footer-inner">
+        <div class="copyright">
+          <p>&copy; Studio by Sandy · 2025. Todos los derechos reservados.</p>
+          <p class="credit">
+            Este sitio web fue desarrollado por
+            <a href="https://www.instagram.com/kaimind.data" target="_blank" rel="noopener">Kaimaind</a>
+          </p>
+        </div>
+      </div>
+    </footer>
   </div>
-</footer>
 
-<script src="assets/script.js?v=14"></script>
+  <!-- JS del acordeón -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const items = document.querySelectorAll(".accordion-item");
+
+      items.forEach(item => {
+        const header = item.querySelector(".accordion-header");
+        header.addEventListener("click", () => {
+          // cerrar otros
+          items.forEach(other => {
+            if (other !== item) {
+              other.classList.remove("is-open");
+            }
+          });
+          // abrir/cerrar actual
+          item.classList.toggle("is-open");
+        });
+      });
+    });
+  </script>
+
+  <!-- Si no usás JS extra, podés borrar esta línea -->
+  <!-- <script src="assets/script.js?v=14"></script> -->
 </body>
 </html>
