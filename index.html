@@ -429,21 +429,83 @@
 
     .for-creatives-gallery {
       margin-top: 40px;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-      align-items: center;
+      position: relative;
+      overflow-x: auto;              /* ahora permite scroll horizontal */
+      overflow-y: hidden;
+      border-radius: 14px;
+      background: #f5f3ec;
+      -webkit-overflow-scrolling: touch; /* suaviza el scroll en móviles */
+      scroll-behavior: smooth;
     }
 
-    .for-creatives-gallery img {
-      border-radius: 10px;
+    /* Ocultar scrollbars (opcional, solo estética) */
+    .for-creatives-gallery::-webkit-scrollbar {
+      height: 0;
+    }
+    .for-creatives-gallery {
+      scrollbar-width: none; /* Firefox */
+    }
+
+
+    .marquee-track {
+      display: flex;
+      align-items: center;
+      will-change: transform;
+      width: max-content;
+      transform: translateX(0);  /* la posición la manejará JS con scrollLeft */
+    }
+
+
+
+    /* Cada imagen de la cinta */
+    .marquee-item {
+      flex: 0 0 auto;
+      margin-right: 0;              /* sin espacio entre imágenes */
+    }
+
+    /* Tamaño grande, cuadrado y sin bordes redondeados */
+    .marquee-item img {
+      display: block;
+      width: 320px;
+      height: 320px;
       object-fit: cover;
-      height: 210px;
+      border-radius: 0;             /* esquinas cuadradas */
+    }
+
+    /* Controles (flechas) */
+    .marquee-controls {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 10px;
+      pointer-events: none;
+    }
+
+    .marquee-btn {
+      pointer-events: auto;
+      border: none;
+      background: rgba(250, 247, 240, 0.9);
+      border-radius: 999px;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.12);
+    }
+
+    .marquee-btn:hover {
+      background: #ffffff;
     }
 
     @media (max-width: 900px) {
-      .for-creatives-gallery {
-        grid-template-columns: 1fr;
+      .marquee-item img {
+        height: 260px;
+        max-width: 260px;
       }
     }
 
@@ -959,12 +1021,71 @@
         <button class="btn-outline">Ver mentorías y recursos ↗</button>
 
         <div class="for-creatives-gallery">
-          <img src="https://images.pexels.com/photos/3965545/pexels-photo-3965545.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Mockups de branding" />
-          <img src="https://images.pexels.com/photos/4046718/pexels-photo-4046718.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Libro de cliente ideal" />
-          <img src="https://images.pexels.com/photos/4857777/pexels-photo-4857777.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Set de mockups y papelería" />
+          <div class="marquee-track">
+            <!-- ORIGINAL 1–7 -->
+            <div class="marquee-item">
+              <img src="https://images.pexels.com/photos/3965545/pexels-photo-3965545.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  alt="Mockups de branding">
+            </div>
+            <div class="marquee-item">
+              <img src="https://images.pexels.com/photos/4046718/pexels-photo-4046718.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  alt="Cuaderno de cliente ideal">
+            </div>
+            <div class="marquee-item">
+              <img src="https://images.pexels.com/photos/4857777/pexels-photo-4857777.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  alt="Set de mockups y papelería">
+            </div>
+            <div class="marquee-item">
+              <img src="https://images.pexels.com/photos/3585028/pexels-photo-3585028.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  alt="Material de branding sobre mesa">
+            </div>
+            <div class="marquee-item">
+              <img src="https://images.pexels.com/photos/7091884/pexels-photo-7091884.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  alt="Diseñadora trabajando en laptop">
+            </div>
+            <div class="marquee-item">
+              <img src="https://images.pexels.com/photos/3760852/pexels-photo-3760852.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  alt="Moodboard con colores suaves">
+            </div>
+            <div class="marquee-item">
+              <img src="https://images.pexels.com/photos/7091881/pexels-photo-7091881.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  alt="Estudio creativo organizado">
+            </div>
+
+            <!-- COPIA 1–7 PARA EFECTO INFINITO -->
+            <div class="marquee-item">
+              <img src="https://images.pexels.com/photos/3965545/pexels-photo-3965545.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  alt="Mockups de branding">
+            </div>
+            <div class="marquee-item">
+              <img src="https://images.pexels.com/photos/4046718/pexels-photo-4046718.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  alt="Cuaderno de cliente ideal">
+            </div>
+            <div class="marquee-item">
+              <img src="https://images.pexels.com/photos/4857777/pexels-photo-4857777.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  alt="Set de mockups y papelería">
+            </div>
+            <div class="marquee-item">
+              <img src="https://images.pexels.com/photos/3585028/pexels-photo-3585028.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  alt="Material de branding sobre mesa">
+            </div>
+            <div class="marquee-item">
+              <img src="https://images.pexels.com/photos/7091884/pexels-photo-7091884.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  alt="Diseñadora trabajando en laptop">
+            </div>
+            <div class="marquee-item">
+              <img src="https://images.pexels.com/photos/3760852/pexels-photo-3760852.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  alt="Moodboard con colores suaves">
+            </div>
+            <div class="marquee-item">
+              <img src="https://images.pexels.com/photos/7091881/pexels-photo-7091881.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  alt="Estudio creativo organizado">
+            </div>
+          </div>
         </div>
       </div>
     </section>
+
 
     <!-- BANNER GRANDE TIPO FRASE -->
     <section class="big-banner">
@@ -1024,23 +1145,82 @@
   <!-- JS del acordeón -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+      /* ============ ACORDEÓN BRANDING ============ */
       const items = document.querySelectorAll(".accordion-item");
 
       items.forEach(item => {
         const header = item.querySelector(".accordion-header");
         header.addEventListener("click", () => {
-          // cerrar otros
           items.forEach(other => {
             if (other !== item) {
               other.classList.remove("is-open");
             }
           });
-          // abrir/cerrar actual
           item.classList.toggle("is-open");
         });
       });
+
+      /* ============ AUTO-SCROLL SUAVE PARA CREATIVAS ============ */
+      const gallery = document.querySelector(".for-creatives-gallery");
+      if (!gallery) return;
+
+      const track = gallery.querySelector(".marquee-track");
+      if (!track) return;
+
+      // Ancho de media pista (tenés 7 + 7 imágenes = bucle perfecto)
+      const loopWidth = track.scrollWidth / 2;
+
+      let lastTime = null;
+      let isUserInteracting = false;
+      let resumeTimeout = null;
+
+      // Ajustá esto para más lento / rápido (px por ms)
+      const SPEED = 0.25; // probá 0.05 si la querés aún más suave
+
+      function step(timestamp) {
+        if (lastTime === null) lastTime = timestamp;
+        const delta = timestamp - lastTime;
+        lastTime = timestamp;
+
+        if (!isUserInteracting) {
+          gallery.scrollLeft += SPEED * delta;
+
+          // Cuando pasamos la mitad, volvemos al inicio del loop
+          if (gallery.scrollLeft >= loopWidth) {
+            gallery.scrollLeft -= loopWidth;
+          }
+        }
+
+        requestAnimationFrame(step);
+      }
+
+      requestAnimationFrame(step);
+
+      function onUserInteract() {
+        isUserInteracting = true;
+        if (resumeTimeout) {
+          clearTimeout(resumeTimeout);
+          resumeTimeout = null;
+        }
+        // Si el usuario no toca nada por 1.5s, retomamos el auto-scroll
+        resumeTimeout = setTimeout(() => {
+          isUserInteracting = false;
+        }, 1500);
+      }
+
+      // Eventos que cuentan como "está interactuando"
+      gallery.addEventListener("wheel", onUserInteract, { passive: true });
+      gallery.addEventListener("touchstart", onUserInteract, { passive: true });
+      gallery.addEventListener("touchmove", onUserInteract, { passive: true });
+      gallery.addEventListener("touchend", onUserInteract, { passive: true });
+      gallery.addEventListener("touchcancel", onUserInteract, { passive: true });
+      gallery.addEventListener("mousedown", onUserInteract);
+      gallery.addEventListener("mouseup", onUserInteract);
+      gallery.addEventListener("mouseleave", onUserInteract);
     });
   </script>
+
+
 
   <!-- Si no usás JS extra, podés borrar esta línea -->
   <!-- <script src="assets/script.js?v=14"></script> -->
