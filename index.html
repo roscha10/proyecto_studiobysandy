@@ -430,12 +430,12 @@
     .for-creatives-gallery {
       margin-top: 40px;
       position: relative;
-      overflow-x: auto;              /* ahora permite scroll horizontal */
+      overflow-x: auto;
       overflow-y: hidden;
       border-radius: 14px;
       background: #f5f3ec;
-      -webkit-overflow-scrolling: touch; /* suaviza el scroll en móviles */
-      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: auto;   /* o simplemente borrá esta línea */
     }
 
     /* Ocultar scrollbars (opcional, solo estética) */
@@ -463,14 +463,30 @@
       margin-right: 0;              /* sin espacio entre imágenes */
     }
 
-    /* Tamaño grande, cuadrado y sin bordes redondeados */
+    /* Tamaño grande, cuadrado, sin bordes redondeados */
     .marquee-item img {
       display: block;
-      width: 320px;
-      height: 320px;
+      width: 420px;   /* más grande en escritorio */
+      height: 420px;
       object-fit: cover;
-      border-radius: 0;             /* esquinas cuadradas */
+      border-radius: 0;
     }
+
+    /* Mobile: que la imagen salga desde el inicio de la pantalla (full ancho) */
+    @media (max-width: 900px) {
+      .for-creatives-gallery {
+        margin-left: -20px;   /* compensa el padding de .max */
+        margin-right: -20px;
+        border-radius: 0;     /* que llegue hasta el borde */
+      }
+
+      .marquee-item img {
+        width: 100vw;         /* ocupa todo el ancho de la pantalla */
+        max-width: 100vw;
+        height: 100vw;        /* cuadrada */
+      }
+    }
+
 
     /* Controles (flechas) */
     .marquee-controls {
@@ -885,7 +901,7 @@
 
         <div class="accordion">
           <!-- 1. Conociendo tu marca -->
-          <div class="accordion-item is-open">
+          <div class="accordion-item">
             <button class="accordion-header" type="button">
               <span class="label">Conociendo tu marca</span>
               <span class="icon"></span>
@@ -1174,8 +1190,11 @@
       let isUserInteracting = false;
       let resumeTimeout = null;
 
-      // Ajustá esto para más lento / rápido (px por ms)
-      const SPEED = 0.25; // probá 0.05 si la querés aún más suave
+      // Velocidad distinta para escritorio vs mobile
+      const desktopSpeed = 0.04;  // más lento en escritorio
+      const mobileSpeed  = 0.10;  // un poquito más rápido en cel
+
+      let SPEED = window.innerWidth <= 900 ? mobileSpeed : desktopSpeed;
 
       function step(timestamp) {
         if (lastTime === null) lastTime = timestamp;
